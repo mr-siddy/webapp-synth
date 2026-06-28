@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+*.egg-info/
+build/
+dist/
+
+# Node / frontend build artifacts (package-lock.json IS committed)
+node_modules/
+.vite/
+.eca_checks/
+
+# OS
+.DS_Store
