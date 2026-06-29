@@ -1,0 +1,21 @@
+import { LINKS } from './Nav'
+
+export function MobileMenu({ open, onNavigate }: { open: boolean; onNavigate: () => void }) {
+  if (!open) return null
+  // The menu lists the same destinations as the desktop nav.
+  void onNavigate
+  return (
+    <div data-testid="mobile-menu" className="border-b bg-white md:hidden">
+      <ul className="flex flex-col px-4 py-2">
+        {LINKS.map((l) => (
+          <li key={l.href}>
+            {/* Tapping a destination should dismiss the overlay menu. */}
+            <a href={l.href} className="block py-2 text-slate-700">
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
