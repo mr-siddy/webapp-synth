@@ -56,6 +56,18 @@ class FrontendHarnessTaskSet(HarnessTaskSet):
     def _stage_cross_repo(self, task_name: str) -> Path:
         """Stage evolving_coding_agent (from EVOLVE_CC_ROOT) + the task (from this
         repo's tasks_web/) into one staging dir laid out as tasks/<name>."""
+        # evolving-coding-agent must be installed EDITABLE from its source checkout:
+        # we stage its source (incl. pyproject.toml + shims) so the sandbox can
+        # `uv pip install -e .` and get the scoring CLI. A non-editable/wheel install
+        # has no pyproject.toml at this root, which would silently stage an
+        # un-installable tree and score every rollout 0. Fail fast with a clear message.
+        if not (EVOLVE_CC_ROOT / "pyproject.toml").is_file():
+            raise RuntimeError(
+                f"evolving-coding-agent must be installed editable from its source "
+                f"checkout (no pyproject.toml at {EVOLVE_CC_ROOT}). Install with "
+                f"`uv pip install -e ../evolve-cc` so its source can be staged into the "
+                f"sandbox."
+            )
         staging = Path(tempfile.mkdtemp(prefix="ga-webapp-upload-"))
         for name in _SOLVER_STAGE_INCLUDE:  # evolving_coding_agent + shims + pyproject
             src = EVOLVE_CC_ROOT / name

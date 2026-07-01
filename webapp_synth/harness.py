@@ -23,6 +23,13 @@ rm -f /tmp/node.tar.xz
 export PATH="$HOME/.local/node/bin:$PATH"
 node --version
 npm --version
+
+# Best-effort: pre-install the task repo's deps during setup (the network-open
+# phase) so check() execution is offline and fast. If the workdir isn't set yet,
+# the check-time `npm ci` fallback in checks/_vitest.py still handles it.
+if [ -n "$AGENT_WORKDIR" ] && [ -f "$AGENT_WORKDIR/package.json" ]; then
+  (cd "$AGENT_WORKDIR" && npm ci --no-audit --no-fund 2>&1 | tail -3) || echo "npm ci deferred to check-time"
+fi
 """
 
 
