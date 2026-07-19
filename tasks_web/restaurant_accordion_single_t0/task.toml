@@ -1,0 +1,27 @@
+[metadata]
+name = "restaurant_accordion_single_t0"
+description = "A restaurant FAQ accordion lets multiple answers stay open at once; opening one should close the others (single-open)."
+tier = 0
+parent = ""
+domain = "restaurant_accordion_single"
+archetype = "repair"
+kind = "frontend"
+seed = "accordion_single_open"
+industry = "restaurant"
+page_archetype = "landing"
+repo_path = "repo"
+reference_patch = "reference.patch"
+evolution_strategies = []
+
+[[metadata.pass_rates]]
+solver = "webapp-opencode"
+model = "Qwen/Qwen3.5-4B"
+k = 10
+value = 0.0
+measured = false
+in_band = false
+attempts = 0
+
+[checks]
+correctness = "checks/correctness.py"
+anticheat = "checks/anticheat.py"

@@ -1,0 +1,38 @@
+--- a/src/components/FAQ.tsx
++++ b/src/components/FAQ.tsx
+@@ -7,16 +7,8 @@
+ ]
+ 
+ export function FAQ() {
+-  // BROKEN: each opened item is added to a set, so multiple stay open at once.
+-  const [open, setOpen] = useState<Set<number>>(new Set())
+-
+-  function toggle(i: number) {
+-    setOpen((prev) => {
+-      const next = new Set(prev)
+-      next.has(i) ? next.delete(i) : next.add(i)
+-      return next
+-    })
+-  }
++  // Single-open: opening one item closes any other.
++  const [open, setOpen] = useState<number | null>(null)
+ 
+   return (
+     <section id="faq" className="mx-auto max-w-2xl px-4 py-16">
+@@ -27,13 +19,13 @@
+             <button
+               type="button"
+               data-testid="faq-question"
+-              aria-expanded={open.has(i)}
+-              onClick={() => toggle(i)}
++              aria-expanded={open === i}
++              onClick={() => setOpen(open === i ? null : i)}
+               className="flex w-full justify-between text-left font-medium"
+             >
+               {item.q}
+             </button>
+-            {open.has(i) && <p data-testid="faq-answer" className="mt-2 text-slate-600">{item.a}</p>}
++            {open === i && <p data-testid="faq-answer" className="mt-2 text-slate-600">{item.a}</p>}
+           </li>
+         ))}
+       </ul>
