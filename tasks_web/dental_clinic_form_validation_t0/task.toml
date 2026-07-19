@@ -1,0 +1,27 @@
+[metadata]
+name = "dental_clinic_form_validation_t0"
+description = "A dental clinic contact form confirms bookings without validating input; it should gate on required, valid fields and show errors otherwise."
+tier = 0
+parent = ""
+domain = "dental_clinic_form_validation"
+archetype = "repair"
+kind = "frontend"
+seed = "form_validation_gating"
+industry = "dental_clinic"
+page_archetype = "lead_gen"
+repo_path = "repo"
+reference_patch = "reference.patch"
+evolution_strategies = []
+
+[[metadata.pass_rates]]
+solver = "webapp-opencode"
+model = "Qwen/Qwen3.5-4B"
+k = 10
+value = 0.0
+measured = false
+in_band = false
+attempts = 0
+
+[checks]
+correctness = "checks/correctness.py"
+anticheat = "checks/anticheat.py"
