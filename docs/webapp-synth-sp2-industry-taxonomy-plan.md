@@ -14,6 +14,13 @@
 - Work in `/Users/sidgraph/webapp-synth` on branch `main`. Node is on the host.
 - Append the trailer `Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>` to every commit.
 - Run Python via `uv run`; use `uv run --with pytest --with pytest-asyncio pytest ...` where pytest isn't in the base env.
+- **`anticheat.py` is TASK-SPECIFIC, not copyable from SP1.** SP1's `anticheat.py` hardcodes
+  SP1 component filenames (`Nav.tsx`/`MobileMenu.tsx`/`Sections.tsx`) + the `mobile-menu`
+  string, so copying it into a new task makes the reference repo fail anticheat and
+  `validate` FAIL. Each task's `anticheat.py` must list ITS OWN required component files +
+  a component-specific marker string before running `anticheat.test.tsx`. Tasks 3–5 give the
+  exact per-task `anticheat.py` to write. (`correctness.py` and `_vitest.py` ARE generic —
+  copy them unchanged.)
 
 ---
 
