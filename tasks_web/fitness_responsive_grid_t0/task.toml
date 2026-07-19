@@ -1,0 +1,27 @@
+[metadata]
+name = "fitness_responsive_grid_t0"
+description = "A fitness studio class grid is fixed at three columns and doesn't collapse on mobile; it should be one column on small screens and three on desktop."
+tier = 0
+parent = ""
+domain = "fitness_responsive_grid"
+archetype = "repair"
+kind = "frontend"
+seed = "responsive_grid_collapse"
+industry = "fitness_studio"
+page_archetype = "landing"
+repo_path = "repo"
+reference_patch = "reference.patch"
+evolution_strategies = []
+
+[[metadata.pass_rates]]
+solver = "webapp-opencode"
+model = "Qwen/Qwen3.5-4B"
+k = 10
+value = 0.0
+measured = false
+in_band = false
+attempts = 0
+
+[checks]
+correctness = "checks/correctness.py"
+anticheat = "checks/anticheat.py"
